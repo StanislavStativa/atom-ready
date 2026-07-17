@@ -3,10 +3,14 @@ import {
   defineAtomsCatalog,
   defineAtomsRegistry,
   textFieldSchema,
-} from "@sitecore-content-sdk/nextjs";
+} from "@sitecore-content-sdk/nextjs/atoms";
 import { shadcnComponentDefinitions } from "@json-render/shadcn/catalog";
 import { shadcnComponents } from "@json-render/shadcn";
 import { TextAtom } from "src/atoms/TextAtom";
+import {
+  customAtomActions,
+  customAtomActionsDefinitions,
+} from "src/atoms/registry-actions";
 
 export const catalog = defineAtomsCatalog({
   version: "1.0.1",
@@ -66,7 +70,7 @@ export const catalog = defineAtomsCatalog({
     ButtonGroup: shadcnComponentDefinitions.ButtonGroup,
     Pagination: shadcnComponentDefinitions.Pagination,
   },
-  actions: {},
+  actions: customAtomActionsDefinitions,
 });
 
 export const registry = defineAtomsRegistry(catalog, {
@@ -108,5 +112,5 @@ export const registry = defineAtomsRegistry(catalog, {
     ButtonGroup: shadcnComponents.ButtonGroup,
     Pagination: shadcnComponents.Pagination,
   },
-  actions: {},
+  actions: customAtomActions,
 });
