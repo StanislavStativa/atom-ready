@@ -34,7 +34,7 @@
     "@json-render/shadcn": "^0.19.0",
     "@sitecore-content-sdk/analytics-core": "2.1.1-beta.atoms.20260803145047",
     "@sitecore-content-sdk/events": "2.1.1-beta.atoms.20260803145047",
-    "@sitecore-content-sdk/nextjs": "2.3.0-beta.atoms.20260803145047",
+    "@sitecore-content-sdk/nextjs": "3.0.0-beta.atoms.20260828083519",
     "@sitecore-content-sdk/personalize": "2.1.1-beta.atoms.20260803145047",
     "@sitecore-feaas/clientside": "^0.6.0",
     "@sitecore/components": "~2.1.0",
