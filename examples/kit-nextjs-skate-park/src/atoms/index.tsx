@@ -11,10 +11,14 @@ import {
   customAtomActions,
   customAtomActionsDefinitions,
 } from "src/atoms/registry-actions";
+import { SuperLayout, superLayoutCatalogEntry } from "./SuperLayout";
+import { EmptyItem, emptyItemCatalogEntry } from "./EmptyItem";
 
 export const catalog = defineAtomsCatalog({
   version: "1.0.1",
   components: {
+    SuperLayout: superLayoutCatalogEntry,
+    EmptyItem: emptyItemCatalogEntry,
     Card: {
       ...shadcnComponentDefinitions.Card,
       props: shadcnComponentDefinitions.Card.props.omit({ className: true }),
@@ -75,6 +79,8 @@ export const catalog = defineAtomsCatalog({
 
 export const registry = defineAtomsRegistry(catalog, {
   components: {
+    SuperLayout,
+    EmptyItem,
     Card: shadcnComponents.Card,
     Stack: shadcnComponents.Stack,
     Grid: shadcnComponents.Grid,
