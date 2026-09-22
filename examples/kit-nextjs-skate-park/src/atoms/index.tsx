@@ -1,24 +1,24 @@
-import { z } from "zod";
+import { shadcnComponents } from "@json-render/shadcn";
+import { shadcnComponentDefinitions } from "@json-render/shadcn/catalog";
 import {
   defineAtomsCatalog,
   defineAtomsRegistry,
   textFieldSchema,
 } from "@sitecore-content-sdk/nextjs/atoms";
-import { shadcnComponentDefinitions } from "@json-render/shadcn/catalog";
-import { shadcnComponents } from "@json-render/shadcn";
 import { TextAtom } from "src/atoms/TextAtom";
 import {
   customAtomActions,
   customAtomActionsDefinitions,
 } from "src/atoms/registry-actions";
-import { SuperLayout, superLayoutCatalogEntry } from "./SuperLayout";
+import { z } from "zod";
 import { EmptyItem, emptyItemCatalogEntry } from "./EmptyItem";
+import { SuperLayout, superLayoutCatalogEntry } from "./SuperLayout";
 
 export const catalog = defineAtomsCatalog({
   version: "1.0.1",
   components: {
-    // SuperLayout: superLayoutCatalogEntry,
-    // EmptyItem: emptyItemCatalogEntry,
+    SuperLayout: superLayoutCatalogEntry,
+    EmptyItem: emptyItemCatalogEntry,
     Card: {
       ...shadcnComponentDefinitions.Card,
       props: shadcnComponentDefinitions.Card.props.omit({ className: true }),
@@ -79,8 +79,8 @@ export const catalog = defineAtomsCatalog({
 
 export const registry = defineAtomsRegistry(catalog, {
   components: {
-    // SuperLayout,
-    // EmptyItem,
+    SuperLayout,
+    EmptyItem,
     Card: shadcnComponents.Card,
     Stack: shadcnComponents.Stack,
     Grid: shadcnComponents.Grid,
