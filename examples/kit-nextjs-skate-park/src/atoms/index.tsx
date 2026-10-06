@@ -1,8 +1,13 @@
 import { shadcnComponents } from "@json-render/shadcn";
 import { shadcnComponentDefinitions } from "@json-render/shadcn/catalog";
 import {
+  dateFieldSchema,
   defineAtomsCatalog,
   defineAtomsRegistry,
+  fileFieldSchema,
+  imageFieldSchema,
+  linkFieldSchema,
+  richTextFieldSchema,
   textFieldSchema,
 } from "@sitecore-content-sdk/nextjs/atoms";
 import { TextAtom } from "src/atoms/TextAtom";
@@ -11,7 +16,12 @@ import {
   customAtomActionsDefinitions,
 } from "src/atoms/registry-actions";
 import { z } from "zod";
+import { DateAtom } from "./DateAtom";
 import { EmptyItem, emptyItemCatalogEntry } from "./EmptyItem";
+import { FileAtom } from "./FileAtom";
+import { ImageAtom } from "./ImageAtom";
+import { LinkAtom } from "./LinkAtom";
+import { RichTextAtom } from "./RichTextAtom";
 import { SuperLayout, superLayoutCatalogEntry } from "./SuperLayout";
 
 export const catalog = defineAtomsCatalog({
@@ -45,12 +55,58 @@ export const catalog = defineAtomsCatalog({
         text: textFieldSchema(),
       }),
       description:
-        "The Text component displays text content with various styling options.",
+        "Displays a Sitecore single-line text field with inline editing support.",
       example: {
-        text: "Sample text",
+        text: { value: "Sample text" },
       },
     },
-    Image: shadcnComponentDefinitions.Image,
+    RichText: {
+      props: z.object({
+        richText: richTextFieldSchema(),
+      }),
+      description:
+        "Displays a Sitecore rich text field with inline editing support.",
+      example: {
+        richText: { value: "<p>Sample rich text</p>" },
+      },
+    },
+    Date: {
+      props: z.object({
+        date: dateFieldSchema(),
+      }),
+      description:
+        "Displays a Sitecore date field with inline editing support.",
+      example: {
+        date: { value: "2026-10-05T00:00:00Z" },
+      },
+    },
+    File: {
+      props: z.object({
+        file: fileFieldSchema(),
+      }),
+      description:
+        "Displays a download link for a Sitecore file field using its title or display name.",
+      example: {
+        file: { value: { src: "/sample.pdf", title: "Download file" } },
+      },
+    },
+    Image: {
+      props: z.object({
+        image: imageFieldSchema(),
+      }),
+      description:
+        "Displays an optimized Sitecore image field with inline editing support. Provide image width and height in the field value.",
+      example: {
+        image: {
+          value: {
+            src: "/sample-image.jpg",
+            alt: "Sample image",
+            width: 800,
+            height: 600,
+          },
+        },
+      },
+    },
     Avatar: shadcnComponentDefinitions.Avatar,
     Badge: shadcnComponentDefinitions.Badge,
     Alert: shadcnComponentDefinitions.Alert,
@@ -67,7 +123,16 @@ export const catalog = defineAtomsCatalog({
     Switch: shadcnComponentDefinitions.Switch,
     Slider: shadcnComponentDefinitions.Slider,
     Button: shadcnComponentDefinitions.Button,
-    Link: shadcnComponentDefinitions.Link,
+    Link: {
+      props: z.object({
+        link: linkFieldSchema(),
+      }),
+      description:
+        "Displays a Sitecore general link field with inline editing support.",
+      example: {
+        link: { value: { href: "/", text: "Home" } },
+      },
+    },
     DropdownMenu: shadcnComponentDefinitions.DropdownMenu,
     Toggle: shadcnComponentDefinitions.Toggle,
     ToggleGroup: shadcnComponentDefinitions.ToggleGroup,
@@ -94,7 +159,10 @@ export const registry = defineAtomsRegistry(catalog, {
     Table: shadcnComponents.Table,
     Heading: shadcnComponents.Heading,
     Text: TextAtom,
-    Image: shadcnComponents.Image,
+    RichText: RichTextAtom,
+    Date: DateAtom,
+    File: FileAtom,
+    Image: ImageAtom,
     Avatar: shadcnComponents.Avatar,
     Badge: shadcnComponents.Badge,
     Alert: shadcnComponents.Alert,
@@ -111,7 +179,7 @@ export const registry = defineAtomsRegistry(catalog, {
     Switch: shadcnComponents.Switch,
     Slider: shadcnComponents.Slider,
     Button: shadcnComponents.Button,
-    Link: shadcnComponents.Link,
+    Link: LinkAtom,
     DropdownMenu: shadcnComponents.DropdownMenu,
     Toggle: shadcnComponents.Toggle,
     ToggleGroup: shadcnComponents.ToggleGroup,
